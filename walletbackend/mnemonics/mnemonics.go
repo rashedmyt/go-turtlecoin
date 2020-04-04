@@ -14,6 +14,8 @@ import (
 	"github.com/turtlecoin/go-turtlecoin/types"
 )
 
+// MnemonicToPrivateKey converts a string of mnemonic words
+// to a private key
 func MnemonicToPrivateKey(seed string) (privateKey types.PrivateKey, err error) {
 	words := strings.Split(seed, " ")
 	wLen := len(words)
@@ -60,6 +62,8 @@ func MnemonicToPrivateKey(seed string) (privateKey types.PrivateKey, err error) 
 	return
 }
 
+// PrivateKeyToMnemonic converts a private key to
+// a string of mnemonic words
 func PrivateKeyToMnemonic(privateKey types.PrivateKey) string {
 	var words []string
 	wlLen := uint32(len(english))
