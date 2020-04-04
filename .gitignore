@@ -1,0 +1,6 @@
+# Build Related
+bin
+
+# IDE Related
+.vscode
+.idea
