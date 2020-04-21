@@ -6,9 +6,8 @@ package sha3
 
 import (
 	"bytes"
+	"encoding/hex"
 	"testing"
-
-	"github.com/turtlecoin/go-turtlecoin/utils"
 )
 
 func TestKeccak(t *testing.T) {
@@ -36,7 +35,7 @@ func TestKeccak(t *testing.T) {
 
 	for _, test := range tests {
 		got := Keccak(test.input)
-		want, _ := utils.DecodeHex(test.hash)
+		want, _ := hex.DecodeString(test.hash)
 		if !bytes.Equal(got, want) {
 			t.Errorf("unexpected hash : got '%x' want '%s'", got, test.hash)
 		}
@@ -67,7 +66,7 @@ func TestKeccak1600(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		want, _ := utils.DecodeHex(test.hash)
+		want, _ := hex.DecodeString(test.hash)
 		got := Keccak1600(test.input)
 		if !bytes.Equal(got, want) {
 			t.Errorf("unexpected hash : got '%x' want '%s'", got, test.hash)

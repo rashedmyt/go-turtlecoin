@@ -9,7 +9,6 @@ import (
 	"testing"
 
 	"github.com/turtlecoin/go-turtlecoin/types"
-	"github.com/turtlecoin/go-turtlecoin/utils"
 )
 
 var tests = []struct {
@@ -46,7 +45,7 @@ func TestMnemonicToPrivateKey(t *testing.T) {
 func TestPrivateKeyToMnemonic(t *testing.T) {
 	for _, test := range tests {
 		var testKey types.PrivateKey
-		keyBytes, _ := utils.DecodeHex(test.key)
+		keyBytes, _ := hex.DecodeString(test.key)
 		copy(testKey[:], keyBytes)
 		seed := PrivateKeyToMnemonic(testKey)
 		if seed != test.seed {
