@@ -6,6 +6,7 @@ package crypto
 
 import (
 	"github.com/turtlecoin/go-turtlecoin/crypto/edwards25519"
+	"github.com/turtlecoin/go-turtlecoin/crypto/sha3"
 	"github.com/turtlecoin/go-turtlecoin/types"
 )
 
@@ -21,6 +22,12 @@ func GenerateKeys() (privKey types.PrivateKey, pubKey types.PublicKey, err error
 	publicKey := NewKeyFromSeed(privateKey[:])
 
 	return privateKey, publicKey, nil
+}
+
+func GenerateViewFromSpend(seed types.PrivateKey) (types.PrivateKey, types.PublicKey) {
+	var secretKey types.PrivateKey
+	copy(secretKey[:], sha3.Keccak(seed[:]))
+	return GenerateDeterministicKeys(secretKey)
 }
 
 // GenerateDeterministicKeys generates a
